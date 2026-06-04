@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xolani Mavuso — Portfolio</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.0/index.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
+            animation: bgShift 15s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes bgShift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-5%, -5%); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #a1a1aa;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-name {
+            font-size: clamp(2.8rem, 7vw, 5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.15s both;
+        }
+
+        .hero-name .gradient-text {
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-greeting {
+            font-size: 1.15rem;
+            color: #a1a1aa;
+            line-height: 1.7;
+            max-width: 520px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .hero-greeting span {
+            color: #e5e5e5;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: #52525b;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .scroll-indicator .line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, #52525b, transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 4rem 2rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #71717a;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.85rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.03);
+            color: #a1a1aa;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #e5e5e5;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .tab-btn .tab-icon {
+            margin-right: 0.5rem;
+        }
+
+        /* Content Panels */
+        .panel {
+            display: none;
+            animation: panelIn 0.5s ease;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        @keyframes panelIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Website Cards */
+        .website-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .website-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .website-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .website-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .website-card:hover::before {
+            opacity: 1;
+        }
+
+        .website-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .website-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .website-arrow {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .website-card:hover .website-arrow {
+            background: rgba(99, 102, 241, 0.3);
+            transform: translate(2px, -2px);
+        }
+
+        .website-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .website-url {
+            font-size: 0.82rem;
+            color: #71717a;
+            word-break: break-all;
+        }
+
+        .website-url span {
+            color: #818cf8;
+        }
+
+        /* Design Cards */
+        .design-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .design-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .design-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+        }
+
+        .design-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            cursor: zoom-in;
+        }
+
+        .design-card:hover .design-image {
+            transform: scale(1.03);
+        }
+
+        .design-image-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .design-image-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.8), transparent);
+            pointer-events: none;
+        }
+
+        /* Zoom hint overlay */
+        .zoom-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.85);
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 0.45rem 1rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        .design-image-wrapper:hover .zoom-hint {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .design-content {
+            padding: 1.5rem;
+        }
+
+        .design-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .design-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .design-description {
+            font-size: 0.9rem;
+            color: #a1a1aa;
+            line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+
+        .design-description .truncated {
+            display: inline;
+        }
+
+        .design-description .full-text {
+            display: none;
+        }
+
+        .design-description.expanded .truncated {
+            display: none;
+        }
+
+        .design-description.expanded .full-text {
+            display: inline;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e5e5e5;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .read-more-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .read-more-btn .arrow {
+            transition: transform 0.3s ease;
+            font-size: 0.7rem;
+        }
+
+        .read-more-btn.expanded .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* =====================
+           LIGHTBOX
+        ===================== */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.92);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            cursor: zoom-out;
+            backdrop-filter: blur(8px);
+            animation: lbFadeIn 0.25s ease;
+        }
+
+        .lightbox-overlay.open {
+            display: flex;
+        }
+
+        @keyframes lbFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-inner {
+            position: relative;
+            max-width: min(90vw, 1100px);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: lbScaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes lbScaleIn {
+            from { opacity: 0; transform: scale(0.88); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8);
+            display: block;
+            cursor: default;
+        }
+
+        .lightbox-caption {
+            margin-top: 1.2rem;
+            text-align: center;
+        }
+
+        .lightbox-caption .lb-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #e5e5e5;
+            margin-bottom: 0.2rem;
+        }
+
+        .lightbox-caption .lb-tag {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #e5e5e5;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Prev / Next arrows */
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #e5e5e5;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(99, 102, 241, 0.35);
+            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .lightbox-nav.prev {
+            left: -3.5rem;
+        }
+
+        .lightbox-nav.next {
+            right: -3.5rem;
+        }
+
+        /* Dot indicators */
+        .lightbox-dots {
+            display: flex;
+            gap: 6px;
+            margin-top: 1rem;
+        }
+
+        .lightbox-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .lightbox-dot.active {
+            background: #818cf8;
+            transform: scale(1.3);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            color: #52525b;
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: #a1a1aa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #e5e5e5;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .website-grid,
+            .design-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-tabs {
+                justify-content: center;
+            }
+
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .projects-section {
+                padding: 3rem 1.25rem 4rem;
+            }
+
+            .lightbox-nav {
+                display: none;
+            }
+
+            .lightbox-inner {
+                max-width: 95vw;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">Portfolio 2026</div>
+            <h1 class="hero-name">
+                Hey, I'm <span class="gradient-text">Xolani Mavuso</span>
+            </h1>
+            <p class="hero-greeting">
+                Welcome to my corner of the internet. <span>Here are some of the projects I've created</span> — a mix of websites and design work that I'm proud to share with you.
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="section-label">My Work</div>
+        <h2 class="section-title">Featured Projects</h2>
+
+        <div class="category-tabs">
+            <button class="tab-btn active" data-tab="websites">
+                <span class="tab-icon">🌐</span> Websites
+            </button>
+            <button class="tab-btn" data-tab="designs">
+                <span class="tab-icon">🎨</span> Designs
+            </button>
+        </div>
+
+        <!-- Websites Panel -->
+        <div class="panel active" id="websites-panel">
+            <div class="website-grid">
+                <a href="https://fikronix.co.za/tourism/" target="_blank" rel="noopener" class="website-card">
+                    <div class="website-card-header">
+                        <div class="website-icon">🌍</div>
+                        <div class="website-arrow">↗</div>
+                    </div>
+                    <div class="website-name">Tourism</div>
+                    <div class="website-url"><span>fikronix.co.za</span>/tourism/</div>
+                </a>
+
+                <a href="https://fikronix.co.za/codebucks/" target="_blank" rel="noopener" class="website-card">
+                    <div class="website-card-header">
+                        <div class="website-icon">💻</div>
+                        <div class="website-arrow">↗</div>
+                    </div>
+                    <div class="website-name">Codebucks</div>
+                    <div class="website-url"><span>fikronix.co.za</span>/codebucks/</div>
+                </a>
+
+                <a href="https://fikronix.co.za/pixology/" target="_blank" rel="noopener" class="website-card">
+                    <div class="website-card-header">
+                        <div class="website-icon">📸</div>
+                        <div class="website-arrow">↗</div>
+                    </div>
+                    <div class="website-name">Pixology</div>
+                    <div class="website-url"><span>fikronix.co.za</span>/pixology/</div>
+                </a>
+
+                <a href="https://fikronix.co.za/portfolio/" target="_blank" rel="noopener" class="website-card">
+                    <div class="website-card-header">
+                        <div class="website-icon">👤</div>
+                        <div class="website-arrow">↗</div>
+                    </div>
+                    <div class="website-name">Portfolio</div>
+                    <div class="website-url"><span>fikronix.co.za</span>/portfolio/</div>
+                </a>
+
+                <a href="https://fikronix.co.za/Omnifood/" target="_blank" rel="noopener" class="website-card">
+                    <div class="website-card-header">
+                        <div class="website-icon">🍽️</div>
+                        <div class="website-arrow">↗</div>
+                    </div>
+                    <div class="website-name">Omnifood</div>
+                    <div class="website-url"><span>fikronix.co.za</span>/Omnifood/</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Designs Panel -->
+        <div class="panel" id="designs-panel">
+            <div class="design-grid">
+
+                <!-- GlamAI -->
+                <div class="design-card">
+                    <div class="design-image-wrapper">
+                        <img src="images/glamai.png" alt="GlamAI App" class="design-image lightbox-trigger"
+                             data-title="GlamAI: The Future of Glam"
+                             data-tag="Mobile App">
+                        <div class="zoom-hint">🔍 Click to enlarge</div>
+                    </div>
+                    <div class="design-content">
+                        <span class="design-tag">Mobile App</span>
+                        <h3 class="design-title">GlamAI: The Future of Glam</h3>
+                        <p class="design-description">
+                            <span class="truncated">So, the first project is this sleek mobile app called <strong>GlamAI</strong>. The whole vibe here is super high-fashion and moody. You can see it's the welcome screen for an app that's basically trying to blend the fashion world with AI technology...</span>
+                            <span class="full-text">So, the first project is this sleek mobile app called <strong>GlamAI</strong>. The whole vibe here is super high-fashion and moody. You can see it's the welcome screen for an app that's basically trying to blend the fashion world with AI technology. The headline is 'The future of glam starts here,' and it promises to make looking good effortless. I really like the visual contrast they used—the dark, minimalist background makes that bright pink 'Get Now' button and the model's face just pop. It feels very exclusive and modern, like a high-end beauty tech startup.</span>
+                        </p>
+                        <button class="read-more-btn" onclick="toggleDescription(this)">
+                            <span class="btn-label">Read more</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grevana -->
+                <div class="design-card">
+                    <div class="design-image-wrapper">
+                        <img src="images/gravana.webp" alt="Grevana Farm Fresh" class="design-image lightbox-trigger"
+                             data-title="Grevana: Farm Fresh Delivery"
+                             data-tag="Web Design">
+                        <div class="zoom-hint">🔍 Click to enlarge</div>
+                    </div>
+                    <div class="design-content">
+                        <span class="design-tag">Web Design</span>
+                        <h3 class="design-title">Grevana: Farm Fresh Delivery</h3>
+                        <p class="design-description">
+                            <span class="truncated">With <strong>Grevana</strong>, I wanted to create a website that instantly communicates freshness and reliability. I chose a bright, airy blue and green color palette to reflect the natural, farm-to-table vibe. The hero section is designed to grab attention immediately...</span>
+                            <span class="full-text">With <strong>Grevana</strong>, I wanted to create a website that instantly communicates freshness and reliability. I chose a bright, airy blue and green color palette to reflect the natural, farm-to-table vibe. The hero section is designed to grab attention immediately with the 'Fresh Always Delivered' headline and high-quality imagery of the produce. I focused heavily on building trust, which is why I prominently displayed key stats like '966+ Fresh Products' and badges for '100% Natural' and 'Quality Checks.' My layout strategy was to keep the navigation simple and the content scannable, leading the user naturally from the 'Shop Fresh Produce' call-to-action down to the 'Growing Freshness' story section.</span>
+                        </p>
+                        <button class="read-more-btn" onclick="toggleDescription(this)">
+                            <span class="btn-label">Read more</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cowboy -->
+                <div class="design-card">
+                    <div class="design-image-wrapper">
+                        <img src="images/cowboy.png" alt="Cowboy E-bike" class="design-image lightbox-trigger"
+                             data-title="Cowboy: Take the Streets"
+                             data-tag="Web Design">
+                        <div class="zoom-hint">🔍 Click to enlarge</div>
+                    </div>
+                    <div class="design-content">
+                        <span class="design-tag">Web Design</span>
+                        <h3 class="design-title">Cowboy: Take the Streets</h3>
+                        <p class="design-description">
+                            <span class="truncated">Moving on to the second one, this is a website design for an e-bike brand called <strong>Cowboy</strong>, specifically highlighting their 'Cowboy 3' model. The main headline is 'Take the streets,' which sets a really cool, urban tone...</span>
+                            <span class="full-text">Moving on to the second one, this is a website design for an e-bike brand called <strong>Cowboy</strong>, specifically highlighting their 'Cowboy 3' model. The main headline is 'Take the streets,' which sets a really cool, urban tone. What's neat about this presentation is how they're showing the responsive design side-by-side on a desktop monitor and a laptop. The copy is really clever, too—'shift your ride, not gears'—which tells the user right away that it's a smooth, automatic electric bike. They also included some press shout-outs from The Guardian and TNW to build trust. The smooth gradient backgrounds give it a really premium, polished feel.</span>
+                        </p>
+                        <button class="read-more-btn" onclick="toggleDescription(this)">
+                            <span class="btn-label">Read more</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Procedura -->
+                <div class="design-card">
+                    <div class="design-image-wrapper">
+                        <img src="images/proceduar.png" alt="Procedura Body Scrub" class="design-image lightbox-trigger"
+                             data-title="Procedura: Natural Body Scrub"
+                             data-tag="Product Design">
+                        <div class="zoom-hint">🔍 Click to enlarge</div>
+                    </div>
+                    <div class="design-content">
+                        <span class="design-tag">Product Design</span>
+                        <h3 class="design-title">Procedura: Natural Body Scrub</h3>
+                        <p class="design-description">
+                            <span class="truncated">And for the last one, we've got this product packaging and photography concept for a skincare line called <strong>Procedura</strong>. It's a 300ml 'Natural Body Scrub.' The aesthetic here is completely different from the tech stuff above...</span>
+                            <span class="full-text">And for the last one, we've got this product packaging and photography concept for a skincare line called <strong>Procedura</strong>. It's a 300ml 'Natural Body Scrub.' The aesthetic here is completely different from the tech stuff above—it's all about warm, earthy, organic luxury. They used these classic dark amber jars with simple black lids, and the label features this really clean, elegant serif font. The lighting in the shot is super soft and moody, which makes the product look like something you'd find in a really high-end, minimalist boutique or spa. It feels very grounded and natural.</span>
+                        </p>
+                        <button class="read-more-btn" onclick="toggleDescription(this)">
+                            <span class="btn-label">Read more</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Maximize -->
+                <div class="design-card">
+                    <div class="design-image-wrapper">
+                        <img src="images/maximum.webp" alt="Maximize App" class="design-image lightbox-trigger"
+                             data-title="Maximize: Nova Sound Pro"
+                             data-tag="E-Commerce App">
+                        <div class="zoom-hint">🔍 Click to enlarge</div>
+                    </div>
+                    <div class="design-content">
+                        <span class="design-tag">E-Commerce App</span>
+                        <h3 class="design-title">Maximize: Nova Sound Pro</h3>
+                        <p class="design-description">
+                            <span class="truncated">For this project, I designed a mobile e-commerce experience for a brand called <strong>Maximize</strong>, specifically focusing on their 'Nova Sound Pro' headphones. My goal was to make the product page as informative as possible without cluttering the screen...</span>
+                            <span class="full-text">For this project, I designed a mobile e-commerce experience for a brand called <strong>Maximize</strong>, specifically focusing on their 'Nova Sound Pro' headphones. My goal was to make the product page as informative as possible without cluttering the screen. I structured the layout to guide the user naturally from the product imagery down to the color selection and price. I made sure to include a detailed 'Specification' section with clear icons—like 'Water-Proof' and 'Fast Charge'—so users can scan features quickly. To build trust and reduce hesitation, I also integrated a 'Product Support & FAQs' section and a user testimonial right near the bottom, ensuring customers feel confident before hitting that 'Add To Cart' button.</span>
+                        </p>
+                        <button class="read-more-btn" onclick="toggleDescription(this)">
+                            <span class="btn-label">Read more</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hornets -->
+                <div class="design-card">
+                    <div class="design-image-wrapper">
+                        <img src="/images/hornets.webp" alt="Hornets Branding" class="design-image lightbox-trigger"
+                             data-title="Hornets: Esports & Team Branding"
+                             data-tag="Branding">
+                        <div class="zoom-hint">🔍 Click to enlarge</div>
+                    </div>
+                    <div class="design-content">
+                        <span class="design-tag">Branding</span>
+                        <h3 class="design-title">Hornets: Esports & Team Branding</h3>
+                        <p class="design-description">
+                            <span class="truncated">For the <strong>Hornets</strong> identity project, I aimed to create a bold, aggressive brand look suitable for a competitive sports or esports team. I designed the logo around a sharp, stylized hornet head enclosed in a hexagon...</span>
+                            <span class="full-text">For the <strong>Hornets</strong> identity project, I aimed to create a bold, aggressive brand look suitable for a competitive sports or esports team. I designed the logo around a sharp, stylized hornet head enclosed in a hexagon, using a high-contrast palette of black, white, and electric yellow to make it pop. My main focus was versatility; I wanted to ensure the logo worked just as well as a small embroidered patch on a cap as it did as a large chest print on a t-shirt. I applied the branding across a full range of merchandise—including polos and tees—to demonstrate how the identity system holds up across different fabrics and formats.</span>
+                        </p>
+                        <button class="read-more-btn" onclick="toggleDescription(this)">
+                            <span class="btn-label">Read more</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Xolani Mavuso. Built with passion.</p>
+    </footer>
+
+    <!-- =====================
+         LIGHTBOX MARKUP
+    ===================== -->
+    <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+        <div class="lightbox-inner" id="lightbox-inner">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">✕</button>
+            <button class="lightbox-nav prev" id="lb-prev" aria-label="Previous image">&#8592;</button>
+            <button class="lightbox-nav next" id="lb-next" aria-label="Next image">&#8594;</button>
+            <img src="" alt="" class="lightbox-img" id="lightbox-img">
+            <div class="lightbox-caption">
+                <div class="lb-title" id="lb-title"></div>
+                <span class="lb-tag" id="lb-tag"></span>
+            </div>
+            <div class="lightbox-dots" id="lightbox-dots"></div>
+        </div>
+    </div>
+
+    <script>
+        /* ---- Tab switching ---- */
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.panel');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-tab');
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                panels.forEach(p => p.classList.remove('active'));
+                document.getElementById(target + '-panel').classList.add('active');
+            });
+        });
+
+        /* ---- Read more toggle ---- */
+        function toggleDescription(btn) {
+            const card = btn.closest('.design-card');
+            const desc = card.querySelector('.design-description');
+            const label = btn.querySelector('.btn-label');
+            desc.classList.toggle('expanded');
+            btn.classList.toggle('expanded');
+            label.textContent = desc.classList.contains('expanded') ? 'Show less' : 'Read more';
+        }
+
+        /* ---- Lightbox ---- */
+        const overlay   = document.getElementById('lightbox');
+        const lbImg     = document.getElementById('lightbox-img');
+        const lbTitle   = document.getElementById('lb-title');
+        const lbTag     = document.getElementById('lb-tag');
+        const lbClose   = document.getElementById('lightbox-close');
+        const lbPrev    = document.getElementById('lb-prev');
+        const lbNext    = document.getElementById('lb-next');
+        const lbDots    = document.getElementById('lightbox-dots');
+
+        let images = [];   // array of {src, alt, title, tag}
+        let current = 0;
+
+        function buildImageList() {
+            images = [];
+            document.querySelectorAll('.lightbox-trigger').forEach(img => {
+                images.push({
+                    src:   img.src,
+                    alt:   img.alt,
+                    title: img.dataset.title || '',
+                    tag:   img.dataset.tag   || ''
+                });
+            });
+        }
+
+        function buildDots() {
+            lbDots.innerHTML = '';
+            images.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'lightbox-dot' + (i === current ? ' active' : '');
+                dot.addEventListener('click', () => goTo(i));
+                lbDots.appendChild(dot);
+            });
+        }
+
+        function goTo(index) {
+            current = (index + images.length) % images.length;
+            const data = images[current];
+
+            /* Fade swap */
+            lbImg.style.opacity = '0';
+            lbImg.style.transform = 'scale(0.96)';
+            setTimeout(() => {
+                lbImg.src = data.src;
+                lbImg.alt = data.alt;
+                lbTitle.textContent = data.title;
+                lbTag.textContent   = data.tag;
+                lbImg.style.opacity = '1';
+                lbImg.style.transform = 'scale(1)';
+            }, 180);
+
+            /* Update dots */
+            document.querySelectorAll('.lightbox-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === current);
+            });
+        }
+
+        function openLightbox(clickedImg) {
+            buildImageList();
+            current = images.findIndex(item => item.src === clickedImg.src);
+            if (current === -1) current = 0;
+
+            const data = images[current];
+            lbImg.src           = data.src;
+            lbImg.alt           = data.alt;
+            lbTitle.textContent = data.title;
+            lbTag.textContent   = data.tag;
+            lbImg.style.opacity = '1';
+            lbImg.style.transform = 'scale(1)';
+
+            buildDots();
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        /* Attach triggers */
+        document.querySelectorAll('.lightbox-trigger').forEach(img => {
+            img.addEventListener('click', () => openLightbox(img));
+        });
+
+        /* Controls */
+        lbClose.addEventListener('click', closeLightbox);
+        lbPrev.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+        lbNext.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+
+        /* Click backdrop to close */
+        overlay.addEventListener('click', e => {
+            if (e.target === overlay) closeLightbox();
+        });
+
+        /* Keyboard navigation */
+        document.addEventListener('keydown', e => {
+            if (!overlay.classList.contains('open')) return;
+            if (e.key === 'Escape')      closeLightbox();
+            if (e.key === 'ArrowLeft')   goTo(current - 1);
+            if (e.key === 'ArrowRight')  goTo(current + 1);
+        });
+
+        /* Swipe support for mobile */
+        let touchStartX = 0;
+        overlay.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        overlay.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) {
+                goTo(diff > 0 ? current + 1 : current - 1);
+            }
+        }, { passive: true });
+    </script>
+
+</body>
+</html>
